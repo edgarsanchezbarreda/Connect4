@@ -28,9 +28,11 @@ function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.getElementById('board');
   // TODO: add comment for this code
+  // Here we create a table row with the variable name "top", with a click event listener to add a piece to the board when triggered.
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
+
 
   for (let x = 0; x < WIDTH; x++) {
     const headCell = document.createElement("td");
@@ -40,8 +42,10 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // TODO: add comment for this code
+
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
+    // Here, individual cells are added to the top row, which allows ths user to click a specific cell, and add a piece the the specific column that contains the cell.
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
@@ -55,7 +59,12 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  for(let y = HEIGHT - 1; y >= 0; y--){
+    if(!board[y][x]){
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -74,6 +83,7 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -81,7 +91,7 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   const x = +evt.target.id;
-
+  
   // get next spot in column (if none, ignore click)
   const y = findSpotForCol(x);
   if (y === null) {
@@ -90,6 +100,7 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
+  board[y][x] = currPlayer;
   placeInTable(y, x);
 
   // check for win
@@ -99,9 +110,13 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-
+  if(board.every(row => row.every(cell => cell))){
+    return endGame('NO WINNER, PLEASE TRY AGAIN!!');
+  }
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  // Using, the ternary operator, if currPlayer equals 1, return currPLayer = 2, otherwise return currPlayer = 1
+  currPlayer = currPlayer === 1 ? 2 : 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */

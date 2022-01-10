@@ -37,11 +37,3 @@
 #column-top td:hover {
   background-color: gold;
 }
-
-.test {
-  display: inline-block;
-  background-color: red;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-}
