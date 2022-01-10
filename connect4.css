@@ -15,6 +15,17 @@
   height: 80%;
 }
 
+.p1 {
+  border-radius: 50%;
+  background-color: red;
+}
+ .p2 {
+  border-radius: 50%;
+  background-color: blue;
+ }
+
+
+
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 
 /* column-top is table row of clickable areas for each column */
@@ -25,4 +36,12 @@
 
 #column-top td:hover {
   background-color: gold;
+}
+
+.test {
+  display: inline-block;
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }
